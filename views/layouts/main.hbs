@@ -12,20 +12,20 @@
 
 <body>
     <!--Error Container-->
-
-    <!-- <div>
+     {{#if error}}
+    <div>
         <div class="errorContainer">
-            <p>Error</p>
+            <p>{{error}}</p>
         </div>
-    </div> -->
-
+    </div>
+    {{/if}}
     <!-- Starts Header Section with Navigation Bar -->
     <header>
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
                     <!-- Link to Home Page -->
-                    <a href="#">
+                    <a href="/">
                         <img width="50px" src="/static/images/free-30-instagram-stories-icons23_122570.png" alt="img1">
                     </a>
                     <!-- Link to Home Page -->
@@ -43,20 +43,7 @@
                             </a>
                         </li>
 
-                        <!--For Guest User-->
-                        <li class="nav-item">
-                            <!-- Link to Login Page -->
-                            <a href="/login">
-                                <i>Login</i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Link to Register Page -->
-                            <a href="/register">
-                                <i>Register</i>
-                            </a>
-                        </li>
-
+                        {{#if isAuthenticated}}
                         <!--For login users-->
                         <li class="nav-item">
                             <!-- Link to Add Photo Page -->
@@ -78,6 +65,22 @@
                                 <i>Logout</i>
                             </a>
                         </li>
+                         {{else}}
+                         <!--For Guest User-->
+                        <li class="nav-item">
+                            <!-- Link to Login Page -->
+                            <a href="/login">
+                                <i>Login</i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- Link to Register Page -->
+                            <a href="/register">
+                                <i>Register</i>
+                            </a>
+                        </li>
+
+                        {{/if}}
                     </ul>
                 </div>
             </div>
