@@ -4,7 +4,6 @@ const jwt = require('../lib/jwt');
 
 exports.getCatalogPage = async (req, res) => {
     const allPhotos = await petsServices.getAll();
-
     res.render('catalog', { allPhotos });
 };
 
@@ -26,7 +25,8 @@ exports.postCreatePost = async (req, res) => {
     try {
         const { name, age, description, location, image } = req.body;
         const owner = req.user._id;
-        await petsServices.createPetPost(name, age, description, location, image, owner)
+       
+        await petsServices.createPetPost(name, age, description, location, image, owner);
         res.redirect('/catalog');
 
     } catch (error) {

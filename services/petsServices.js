@@ -3,8 +3,10 @@ const User = require('../Models/User');
 
 
 exports.createPetPost = async (name, age, description, location, image, owner) => {
-    const newPet =  await Photo.create({ name, age, description, location, image, owner});
-    console.log(newPet);
+    const userOwner = await this.getUserData(owner)
+    
+    const newPet = await Photo.create({ name, age, description, location, image, owner });
+    
 };
 
 exports.getAll = async () => {
@@ -12,7 +14,7 @@ exports.getAll = async () => {
 };
 
 exports.getOne = async (id) => {
-    const petData = await Book.findById(id).lean();
+    const petData = await Photo.findById(id).lean();
     return petData;
 }
 
