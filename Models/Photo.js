@@ -4,6 +4,7 @@ const PhotoSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true,
+        minLength: 2,
     },
     
     image:{
@@ -14,14 +15,20 @@ const PhotoSchema = new mongoose.Schema({
     age:{
         type: Number,
         required: true,
+        min:1,
+        max: 10,
     },
     description:{
         type: String,
         required: true,
+        min: 5,
+        max: 50
     },
     location:{
         type: String,
         require: true,
+        min: 5,
+        max: 50,
     },
     commentList:[{
         type: mongoose.Types.ObjectId,
@@ -36,6 +43,14 @@ const PhotoSchema = new mongoose.Schema({
 
 const Photo = mongoose.model('Photo', PhotoSchema);
 module.exports = Photo;
+
+
+// •	The name is required and should be at least 2 characters.
+// •	The photo image is required and should start with http:// or https://
+// •	The age is required and should be at least 1 and no longer than 100 characters.
+// •	The description is required and should be at least 5 and no longer than 50 characters.
+// •	The location is required and should be at least 5 and no longer than 50 characters.
+
 
 
 // •	name – string (required)

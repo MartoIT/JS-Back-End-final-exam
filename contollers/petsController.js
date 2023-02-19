@@ -27,7 +27,7 @@ exports.postCreatePost = async (req, res) => {
     try {
         const { name, age, description, location, image } = req.body;
         const owner = req.user._id;
-       
+
         await petsServices.createPetPost(name, age, description, location, image, owner);
         res.redirect('/catalog');
 
@@ -38,24 +38,13 @@ exports.postCreatePost = async (req, res) => {
 }
 
 
-// exports.postAddToWishList = async (req, res) => {
-
-//     const bookId = req.params.bookId;
-//     const token = req.cookies['auth'];
-//     const decodedToken = await jwt.verify(token, 'secret');
-//     const wisherId = decodedToken._id;
-//     await bookService.wishToRead(wisherId, bookId)
-
-//     res.redirect('/catalog')
-// }
-
 
 exports.delete = async (req, res) => {
     const petId = req.params.petId;
     const pet = await petsServices.getOne(petId);
     const isOwner = pet.owner == req.user?._id;
     if (!isOwner) {
-        throw Error `You are not the owner of the book!!!`
+        throw Error`You are not the owner of the book!!!`
     }
 
     await petsServices.delete(petId);
@@ -67,21 +56,20 @@ exports.delete = async (req, res) => {
 
 exports.getEditPage = async (req, res) => {
     const pet = await petsServices.getOne(req.params.petId);
-    
-    res.render('edit', {pet});
+
+    res.render('edit', { pet });
 };
 
 exports.postEditPage = async (req, res) => {
     const id = req.params.petId;
     const data = req.body;
-    
+
     await petsServices.edit(id, data);
-    
+
     const pet = await petsServices.getOne(id);
-    const isOwner = pet.owner == req.user?._id;
-    //const iswished = book.wishingList?.some(id => id == req.user._id);
-    res.render(`details`, { pet })
     
+    res.render(`details`, { pet })
+
 }
 
 
@@ -95,13 +83,22 @@ exports.getProfilePage = async (req, res) => {
     ownPosts.forEach(element => {
         pcsOfPhotos++
     });
-    
+
     console.log(pcsOfPhotos)
     res.render('profile', { userData, pcsOfPhotos, ownPosts });
 }
 
 
 exports.postComent = async (req, res) => {
-   const coment =  req.body;
-   console.log(req.user._id);
+    const pet = req.params.postId;
+    const coment = req.body.coment;
+    const userId = req.user._id
+   
+    
+    //[ { userID: '1234', comment: 'Nice photo!'} ]
+
+    await petsServices.addComent(pet, userId, coment );
+
+    //res.render('/catalog');
+
 }

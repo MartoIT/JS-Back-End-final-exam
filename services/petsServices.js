@@ -22,12 +22,14 @@ exports.getUserData = async (id) => {
     const userData = await User.findById(id).lean();
     return userData;
 }
-// exports.wishToRead = async (wisherId, bookId) => {
+exports.addComent = async (petId, userID, coment) => {
 
-//     const book = await Book.findById(bookId)
-//     book.wishingList.push(wisherId);
-//     await book.save();
-// }
+    const pet = await Photo.findById(petId);
+    
+    pet.commentList.push(userID, coment);
+    console.log(pet.commentList)
+    await pet.save();
+}
 
 exports.delete = async (petId) => {
 

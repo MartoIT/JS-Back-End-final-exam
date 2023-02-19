@@ -15,9 +15,6 @@ router.get('/catalog', petsController.getCatalogPage);
 router.get('/create', petsController.getCreategPage);
 router.post('/create', petsController.postCreatePost);
 router.get('/catalog/:petId/details', petsController.getDetails);
-// router.get('/catalog/wish/:bookId', booksController.postAddToWishList);
-
-
 
 
 router.get('/pet/:petId/edit', petsController.getEditPage);
