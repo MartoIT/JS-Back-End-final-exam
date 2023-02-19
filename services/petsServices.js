@@ -2,8 +2,9 @@ const Photo = require('../Models/Photo');
 const User = require('../Models/User');
 
 
-exports.createPetPost = async (name, age, description, location, image) => {
-    await Photo.create({ name, age, description, location, image})
+exports.createPetPost = async (name, age, description, location, image, owner) => {
+    const newPet =  await Photo.create({ name, age, description, location, image, owner});
+    console.log(newPet);
 };
 
 exports.getAll = async () => {
