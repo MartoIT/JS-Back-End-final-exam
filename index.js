@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser')
 
 const app = express();
-const port = 5000;
+const port = 3000;
 const router = require('./routers');
 const authMiddleware = require('./authMiddleware/authMiddleware');
 
