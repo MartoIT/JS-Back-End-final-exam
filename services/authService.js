@@ -19,8 +19,8 @@ exports.postRegistreUser = async (username, email, password, repeatPassword) => 
 
 }
 
-exports.postloginUser = async (email, password) => {
-    const user = await User.findOne({ email });
+exports.postloginUser = async (username, password) => {
+    const user = await User.findOne({ username });
     if (!user) {
         throw new Error(`email or password is wrong!`)
     }

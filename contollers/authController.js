@@ -6,11 +6,11 @@ exports.getLoginPage = (req, res) => {
 };
 
 exports.postLoginPage = async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
    
     try{
-        const token = await authService.postloginUser(email, password);
+        const token = await authService.postloginUser(username, password);
         res.cookie('auth', token, { httpOnly: true });
 
         res.redirect('/');
