@@ -25,10 +25,10 @@
                             <!-- Link to User Profile Details Page -->
                             <p>
                                 <!-- User's username -->
-                                MayaM
+                                {{user.username}}
                             </p>
                             <!-- photo's location -->
-                            <span>Bansko, Bulgaria</span>
+                            <span>{{pet.location}}</span>
 
                             <!-- IF the viewer is the creator of the photo -->
                             <div class="edit-delete-btns">
@@ -52,7 +52,7 @@
                 <!-- Start Pet Photo -->
                 <div class="imgBx">
                     <!-- Pet Photo -->
-                    <img src="/static/images/axolotl.jpeg" alt="post" class="cover">
+                    <img src="{{pet.image}}" alt="post" class="cover">
                 </div>
 
 
@@ -60,14 +60,14 @@
                 <div class="bottom">
 
                     <p class="message">
-                        <b class="petDescription">This is my pet!</b>
+                        <b class="petDescription">{{pet.description}}</b>
                     </p>
 
 
                     <!-- Photo description -->
                     <div class="pet-details">
-                        <p class="petName">Name: Sal</p>
-                        <p class="petAge">Age: 4</p>
+                        <p class="petName">{{pet.name}}</p>
+                        <p class="petAge">Age: {{pet.age}}</p>
                     </div>
                     <div class="comments">
                         <div class="comments-top">
@@ -77,11 +77,12 @@
                                         <div class="profile_img">
                                             <div class="image">
                                                 <!-- User Profile Image -->
-                                                <img src="/static/images/person.png" alt="img8">
+                                                <img src="{{user.image}}" alt="img8">
                                             </div>
                                         </div>
                                     </div>
-
+                                    {{#if commentList}} 
+                                    {{#each commentList}}
                                     <!--User's username-->
                                     <p><b>StevIvanov</b>- OMG where can i get one</p>
                                 </div>
@@ -96,36 +97,20 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!--User's username-->
-                                    <p><b>StevIvanov</b>- OMG where can i get one</p>
-                                </div>
-                            </div>
-                            <div class="userDetails">
-                                <div class="comment-data">
-                                    <div class="profilepic">
-                                        <div class="profile_img">
-                                            <div class="image">
-                                                <!-- User Profile Image -->
-                                                <img src="/static/images/person.png" alt="img8">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--User's username-->
-                                    <p><b>StevIvanov</b>- OMG where can i get one</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                    {{/each}}
+                                    {{/if}}
+                                    {{#if isOwner}}
+                                    
+                                    {{else}}
                 <div class="addComments">
                     <!-- Start Add Comments Form -->
-                    <form method="#" action="#">
+                    <form method="POST">
                         <textarea id="comment-textarea" name="" cols="40" rows="10"
                             placeholder="Add comment..."></textarea>
                         <!-- Post Comments Button -->
                         <button type="submit">Post</button>
+
+                        {{/if}}
                     </form>
                 </div>
             </div>

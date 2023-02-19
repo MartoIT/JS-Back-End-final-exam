@@ -39,15 +39,15 @@ exports.edit = async (id, data) => {
     await Photo.findByIdAndUpdate(id, data);
 }
 
-// exports.search = async (id) => {
+exports.search = async (id) => {
 
-//     let books = await this.getAll();
+    let posts = await this.getAll();
 
 
-//     if (books) {
+    if (posts) {
 
-//         books = books.filter(x => x.wishingList == id);
-//     }
+        posts = posts.filter(x => x.owner == id);
+    }
 
-//     return books;
-// }
+    return posts;
+}

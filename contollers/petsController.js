@@ -7,13 +7,15 @@ exports.getCatalogPage = async (req, res) => {
     res.render('catalog', { allPhotos });
 };
 
-// exports.getDetails = async (req, res) => {
-//     const pet = await petsServices.getOne(req.params.petId);
-//     const isOwner = book.owner == req.user?._id;
-//     const iswished = book.wishingList?.some(id => id == req.user._id);
+exports.getDetails = async (req, res) => {
+    const pet = await petsServices.getOne(req.params.petId);
+    const isOwner = pet.owner == req.user?._id;
+    const OwnerId = pet.owner;
+    const user = await petsServices.getUserData(OwnerId)
+    const commentList = pet.commentList?.some(id => id == req.user._id);
 
-//     res.render(`details`, { pet, isOwner, iswished })
-// }
+    res.render(`details`, { pet, user, isOwner, commentList })
+}
 
 exports.getCreategPage = async (req, res) => {
     res.render('create');
@@ -83,12 +85,17 @@ exports.getEditPage = async (req, res) => {
 // }
 
 
-// exports.getProfilePage = async (req, res) => {
-//     const token = req.cookies['auth'];
-//     const decodedToken = await jwt.verify(token, 'secret');
-//     const userId = decodedToken._id;
-//     const userData = await bookService.search(userId);
+exports.getProfilePage = async (req, res) => {
+    const token = req.cookies['auth'];
+    const decodedToken = await jwt.verify(token, 'secret');
+    const userId = decodedToken._id;
+    const userData = await petsServices.getUserData(userId);
+    const ownPosts = await petsServices.search(userId);
+    let pcsOfPhotos = 0;
+    ownPosts.forEach(element => {
+        pcsOfPhotos++
+    });
     
-//     console.log(userData[0].wishingList)
-//     res.render('profile');
-// }
+    console.log(pcsOfPhotos)
+    res.render('profile', { userData, pcsOfPhotos, ownPosts });
+}

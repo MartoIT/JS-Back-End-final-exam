@@ -14,13 +14,16 @@ router.get('/catalog', petsController.getCatalogPage);
 
 router.get('/create', petsController.getCreategPage);
 router.post('/create', petsController.postCreatePost);
-// router.get('/catalog/:bookId/details', booksController.getDetails);
+router.get('/catalog/:petId/details', petsController.getDetails);
 // router.get('/catalog/wish/:bookId', booksController.postAddToWishList);
+
+
+
 
 // router.get('/books/:bookId/edit', booksController.getEditPage);
 // router.post('/books/:bookId/edit', booksController.postEditPage);
 
-// router.get('/profile', booksController.getProfilePage);
+router.get('/profile', petsController.getProfilePage);
 
 // router.get('/delete/:bookId', booksController.delete);
 router.get('*', authController.get404);
