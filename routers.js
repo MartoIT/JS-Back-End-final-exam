@@ -20,12 +20,14 @@ router.get('/catalog/:petId/details', petsController.getDetails);
 
 
 
-// router.get('/books/:bookId/edit', booksController.getEditPage);
-// router.post('/books/:bookId/edit', booksController.postEditPage);
+router.get('/pet/:petId/edit', petsController.getEditPage);
+router.post('/pet/:petId/edit', petsController.postEditPage);
 
 router.get('/profile', petsController.getProfilePage);
 
-// router.get('/delete/:bookId', booksController.delete);
+router.post('/coments/:postId', petsController.postComent)
+
+router.get('/delete/:petId', petsController.delete);
 router.get('*', authController.get404);
 
 module.exports = router;

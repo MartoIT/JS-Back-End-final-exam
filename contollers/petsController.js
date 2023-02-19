@@ -52,11 +52,11 @@ exports.postCreatePost = async (req, res) => {
 
 exports.delete = async (req, res) => {
     const petId = req.params.petId;
-    const Photo = await bookService.getOne(petId);
-    // const isOwner = book.owner == req.user?._id;
-    // if (!isOwner) {
-    //     throw Error `You are not the owner of the book!!!`
-    // }
+    const pet = await petsServices.getOne(petId);
+    const isOwner = pet.owner == req.user?._id;
+    if (!isOwner) {
+        throw Error `You are not the owner of the book!!!`
+    }
 
     await petsServices.delete(petId);
     res.redirect('/catalog');
@@ -71,18 +71,18 @@ exports.getEditPage = async (req, res) => {
     res.render('edit', {pet});
 };
 
-// exports.postEditPage = async (req, res) => {
-//     const id = req.params.bookId;
-//     const data = req.body;
+exports.postEditPage = async (req, res) => {
+    const id = req.params.petId;
+    const data = req.body;
     
-//     await bookService.edit(id, data);
+    await petsServices.edit(id, data);
     
-//     const book = await bookService.getOne(id);
-//     const isOwner = book.owner == req.user?._id;
-//     const iswished = book.wishingList?.some(id => id == req.user._id);
-//     res.render(`details`, { book, isOwner, iswished })
+    const pet = await petsServices.getOne(id);
+    const isOwner = pet.owner == req.user?._id;
+    //const iswished = book.wishingList?.some(id => id == req.user._id);
+    res.render(`details`, { pet })
     
-// }
+}
 
 
 exports.getProfilePage = async (req, res) => {
@@ -98,4 +98,10 @@ exports.getProfilePage = async (req, res) => {
     
     console.log(pcsOfPhotos)
     res.render('profile', { userData, pcsOfPhotos, ownPosts });
+}
+
+
+exports.postComent = async (req, res) => {
+   const coment =  req.body;
+   console.log(req.user._id);
 }
