@@ -24,9 +24,9 @@ exports.getCreategPage = async (req, res) => {
 exports.postCreatePost = async (req, res) => {
 
     try {
-        const { title, author, genre, stars, image, review } = req.body;
+        const { name, age, description, location, image } = req.body;
         const owner = req.user._id;
-        await bookService.createBookReview(title, author, genre, stars, image, review, owner)
+        await petsServices.createPetPost(name, age, description, location, image)
         res.redirect('/catalog');
 
     } catch (error) {
